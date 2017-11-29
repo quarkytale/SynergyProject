@@ -47,12 +47,12 @@ for i in range(0,7):
 Y = []
 ####BELOW IS GIVEN A NEW POSITION, YOU CAN TEST THE "GOAL" AS THIS POSITION FOR THE JOINTS TO TRY IT OUT.########
 
-#position = [0.43707952457256116, 0.030886485048354118, -0.9100930412938544,-0.049960844259059556,0.11294876661665842, -0.7784898036329784, 0.026319462646594793]
+position = [0.43707952457256116, 0.030886485048354118, -0.9100930412938544,-0.049960844259059556,0.11294876661665842, -0.7784898036329784, 0.026319462646594793]
 
 for x in range(0,7):
     start = X[x][0]
-    goal = X[x][-1]
-    #goal = position[x]
+    #goal = X[x][-1]
+    goal = position[x]
     my_runner = DMP_runner(filename[x],start,goal)
 
     tau = 1
@@ -60,10 +60,8 @@ for x in range(0,7):
     for i in np.arange(0,int(tau/dt)+1):
 
         '''Dynamic change in goal'''
-        #new_goal = 0.9
-        #new_flag = 1
-        #if i > 0.2*int(tau/dt):
-        #    my_runner.setGoal(new_goal,new_flag)
+        #if i > 0.1*int(tau/dt):     	
+        #	my_runner.setGoal(position[x],1)
         '''Dynamic change in goal'''    
         
         my_runner.step(tau,dt)
