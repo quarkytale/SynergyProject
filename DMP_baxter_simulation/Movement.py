@@ -2,14 +2,26 @@ import rospy
 from std_msgs.msg import String
 import baxter_interface
 limb = 0
+a = []
 def baxter_movement(data):
     #rate = rospy.Rate(10000)
     commands = data.data
+    global a
+    #print("received commands = ",data.data)
     commands = commands.split(',')
     Y = [float(i) for i in commands]
     Y_command = {'right_s0': Y[0], 'right_s1': Y[1], 'right_e0': Y[2], 'right_e1': Y[3], 'right_w0': Y[4], 'right_w1': Y[5], 'right_w2': Y[6]}
-    limb.move_to_joint_positions(Y_command)
-    #rate.sleep() #[use if required]
+    a.append(Y_command)
+    for i in range(200):
+        limb.set_joint_positions(Y_command)
+    #if len(a)>2:
+    #    run_last_two(a)
+    '''a=a+1
+    if a>5:
+        for i in range(0,5):
+            limb.set_joint_positions(Y_command)
+        a = 0'''
+    #limb.set_joint_positions(Y_command)
        
 def listener():
     global limb
@@ -22,6 +34,11 @@ def listener():
     #t.sleep() [use if required]
     rospy.Subscriber("commands", String, baxter_movement)
     rospy.spin()
+
+def run_last_two(a):
+    global limb
+    for x in a[-2:]:
+        limb.set_joint_positions(x)
    
 if __name__ == '__main__':
     listener()
