@@ -46,24 +46,24 @@ Y = []
 
 #position = [0.43707952457256116, 0.030886485048354118, -0.9100930412938544,-0.049960844259059556,0.11294876661665842, -0.7784898036329784, 0.026319462646594793]
 my_runner = [[]]*7
+position = [0.43707952457256116, 0.030886485048354118, -0.9100930412938544,-0.049960844259059556,0.11294876661665842, -0.7784898036329784, 0.026319462646594793]
 for x in range(0,7):
     start = X[x][0]
-    goal = X[x][-1]
-    #goal = position[x]
+    #goal = X[x][-1]
+    goal = position[x]
     my_runner[x] = DMP_runner(filename[x],start,goal)
 
 #Default.Initial_position()
 tau = 1
 #for i in np.arange(0,int(tau/dt)+1):
-
 Command_Publisher = rospy.Publisher('commands', String,queue_size=10)
 rospy.init_node('commands', anonymous=True)
 for i in np.arange(0,int(tau/dt)+1):
-#Dynamic change in goal
-    #new_goal = 0.9
-    #new_flag = 1
-    #if i > 0.2*int(tau/dt):
-    #my_runner.setGoal(new_goal,new_flag)
+    '''Dynamic change in goal'''
+    if i > 0.1*int(tau/dt):
+        for i in range(7):        
+            my_runner[i].setGoal(position[i],1)
+    '''Dynamic change in goal'''  
     for i in range(len(my_runner)):
     	my_runner[i].step(tau,dt)
        	Y.append(my_runner[i].y)
