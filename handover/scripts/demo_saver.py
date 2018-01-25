@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import roslib
-roslib.load_manifest('promp_test')
+#roslib.load_manifest('promp_test')
 import rospy
 import sys, time, os
 import numpy as np
@@ -24,8 +24,8 @@ class Saver:
     		print "No demo recorded"
     	else:
     		self.rec()
-        
-    
+
+
     def rec(self):
     	while True:
     		try:
@@ -36,7 +36,7 @@ class Saver:
 
     			h = self.ht.human()
     			self.demo_human_wrist = np.concatenate((self.demo_human_wrist,h), axis=0)
-    		
+
     		except KeyboardInterrupt:
     			self.i = self.i + 1
     			break
@@ -57,11 +57,11 @@ class Saver:
     		self.rec()
 
     	sio.savemat('src/promp_test/promp/Data/demo_baxter.mat',{'baxter_demo_data':self.ndemos_baxter_joints})
-    	sio.savemat('src/promp_test/promp/Data/demo_human.mat',{'human_demo_data':self.ndemos_human_wrist})     
-    
-def main(args):  
+    	sio.savemat('src/promp_test/promp/Data/demo_human.mat',{'human_demo_data':self.ndemos_human_wrist})
+
+def main(args):
     rospy.init_node('Saver', anonymous=True, disable_signals=True)
-    sav = Saver() 
+    sav = Saver()
 
 if __name__ == '__main__':
     main(sys.argv)

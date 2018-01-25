@@ -16,12 +16,12 @@ def on_message(ws, message, num=[0,0,0,0], r=skeleton()):
 		words[1] = float(words[1])
 		words[2] = float(words[2])
 		words[3] = float(words[3])
-	
+
 	pub = rospy.Publisher('skeleton_data', skeleton, queue_size=10)
 	if words[0][1:-1] == "/NI_mate_sync":
 		num =  [0, 0, 0, 0]
 		r = skeleton()
-		
+
 	elif words[0][1:-1] == "Right_Shoulder":
 		r.joints[0].joint_name = words[0][1:-1]
 		r.joints[0].x = words[1]
@@ -50,7 +50,7 @@ def on_message(ws, message, num=[0,0,0,0], r=skeleton()):
 		r.joints[3].z = words[3]
 		r.joints[3].stamp = rospy.get_time()
 		num[3] = 1
-		
+
 		if sum(num) == 4:
 			# Write the correct publish data
 			print("Publishing...")
@@ -73,12 +73,12 @@ def on_open(ws):
 
 if __name__ == '__main__':
 
-	rospy.init_node('kinect_data', anonymous=True)	
-	try:	
+	rospy.init_node('kinect_data', anonymous=True)
+	try:
 		websocket.enableTrace(True)
-		ws = websocket.WebSocketApp("ws://130.215.206.204:3000", on_message=on_message, on_error=on_error, on_close=on_close)
+		ws = websocket.WebSocketApp("ws://130.215.206.254:3000", on_message=on_message, on_error=on_error, on_close=on_close)
 		ws.on_open = on_open
 		ws.run_forever()
-		
+
 	except KeyboardInterrupt:
 		ws.close()

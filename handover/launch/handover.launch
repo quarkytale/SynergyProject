@@ -1,12 +1,11 @@
 <launch>
 
-      <group ns="turtlesim1">
-        <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
-      </group>
-   
-     <node pkg="turtlesim" name="mimic" type="mimic">
-       <remap from="input" to="turtlesim1/turtle1"/>
-       <remap from="output" to="turtlesim2/turtle1"/>
-     </node>
+      <group ns="demo_recorder">
+        <node pkg="handover" type="pyclient.py" name="kinect_data" required="true"/>
+
+        <node pkg="handover" type="demo_saver.py" name="Saver" output="screen">
+        </node>
+
+     </group>
 
 </launch>
