@@ -1,0 +1,11 @@
+<launch>
+
+      <group ns="demo_recorder">
+        <node pkg="handover" name="pyclient" type="kinect data subscriber"/>
+
+        <node pkg="hanover" name="demo_saver" type="save baxter-human demo data">
+        </node>
+
+     </group>
+
+</launch>
