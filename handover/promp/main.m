@@ -1,3 +1,4 @@
+
 %
 % Interaction Primitives (ProMP-based)
 %
@@ -61,7 +62,8 @@ data_ias = format_ias_data(data);
 %[h] = plot2DwrapA(h, data);
  
 % create the ProMP (ProMP) here
-ProMP = regression_pmp(data_ias, 30, 'GaussianFeatures');
+ProMP = regression_pmp(data_ias, 10
+0, 'GaussianFeatures');
 
 if 0 % check if trajectory was properly encoded by ProMP
     check_ProMP_encoding(ProMP, data);

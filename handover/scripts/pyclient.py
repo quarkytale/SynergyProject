@@ -7,7 +7,7 @@ import time
 import rospy
 
 from std_msgs.msg import String
-from kinect_data.msg import skeleton, joint
+from handover.msg import skeleton, joint
 
 
 def on_message(ws, message, num=[0,0,0,0], r=skeleton()):
