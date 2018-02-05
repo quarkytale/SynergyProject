@@ -3,9 +3,7 @@
 import websocket
 import thread
 import time
-
 import rospy
-
 from std_msgs.msg import String
 from handover.msg import skeleton, joint
 
@@ -56,7 +54,7 @@ def on_message(ws, message, num=[0,0,0,0], r=skeleton()):
 			print("Publishing...")
 			rospy.loginfo(r)
 			pub.publish(r)
-			#rospy.loginfo(r)
+			rospy.loginfo(r)
 	#print(num)
 
 
@@ -68,7 +66,7 @@ def on_close(ws):
 
 def on_open(ws):
 	ws.readyState = 1
-	print("opened connection")
+	print("Opened connection")
 
 
 if __name__ == '__main__':

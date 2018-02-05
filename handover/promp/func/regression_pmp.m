@@ -38,7 +38,7 @@ function pmp = regression_pmp(data, nBasis, basisType)
 
             sigma = 0.05*ones(1,nBasis); % kernel width
 
-            [basis.Gn, basis.Gndot, basis.Gnddot] = generateGaussianBasis( phase, mu_location, sigma);
+            [basis.Gn, basis.Gndot, basis.Gnddot] = generateGaussianBasis(phase, mu_location, sigma);
 
         otherwise
             error('UnitFeature or GaussianFeatures');
