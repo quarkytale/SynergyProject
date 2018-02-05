@@ -1,0 +1,13 @@
+<launch>
+
+      <group ns="demo_recorder">
+        <node pkg="handover" type="pyclient.py" name="kinect_data" required="true"/>
+
+        <node pkg="handover" type="move_baxter.py" name="MoveBaxter" required="true"/>
+
+        <node pkg="handover" type="OtpGenerator.py" name="OtpGenerator" output="screen">
+        </node>
+
+     </group>
+
+</launch>

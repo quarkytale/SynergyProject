@@ -1,0 +1,11 @@
+<launch>
+
+      <group ns="demo_recorder">
+        <node pkg="handover" type="pyclient.py" name="kinect_data" required="true"/>
+
+        <node pkg="handover" type="demo_saver.py" name="Saver" output="screen">
+        </node>
+
+     </group>
+
+</launch>
